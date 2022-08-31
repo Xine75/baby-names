@@ -1,19 +1,6 @@
 <script lang="ts" setup>
+import { Gender, Popularity, Length } from "~/data";
 
-enum Gender {
-  GIRL = "Girl",
-  BOY = "Boy",
-  UNISEX = "Unisex"
-}
-enum Popularity {
-  TRENDY = "Trendy",
-  UNIQUE = "Unique",
-}
-enum Length {
-  SHORT = "Short",
-  LONG = "Long",
-  ALL = "All"
-}
 interface OptionsState {
   gender: Gender;
   popularity: Popularity;
@@ -24,6 +11,9 @@ const options = reactive<OptionsState>({
   popularity: Popularity.UNIQUE,
   length: Length.ALL,
 });
+
+const names = ref<string[]>([])
+
 </script>
 
 <template>
