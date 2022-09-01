@@ -1,0 +1,105 @@
+<script lang="ts" setup>
+
+import {Gender, Popularity, Length } from "~/data";
+
+interface OptionProps {
+  option: {
+    title: string;
+    category: string;
+    buttons: Gender[] | Popularity[] | Length[]
+  };
+  options: {
+    gender: Gender;
+    popularity: Popularity;
+    length: Length
+  }
+}
+const props = defineProps<OptionProps>()
+
+const computeButtonClasses = (value, index) => {
+  const classNames = [];
+  if(props.options[props.option.category] === value) {
+    classNames.push("option-active")
+  }
+  if (index === 0) classNames.push("option-left")
+  if (index === (props.option.buttons.length - 1)) classNames.push("option-right")
+  return classNames.join(" ")
+}
+
+</script>
+
+<template>
+  <div class="option-container">
+    <h4>{{ option.title }}</h4>
+    <div class="option-buttons">
+      <button
+          v-for="(value, index) in option.buttons"
+          :key="value"
+          class="option"
+          :class="computeButtonClasses(value, index)"
+          @click="options[option.category] = value"
+      >
+        {{ value }}
+      </button>
+    </div>
+  </div>
+</template>
+
+<style>
+.option-container {
+  margin-bottom: 2rem;
+}
+.option {
+  background: white;
+  outline: 0.15rem solid rgb(249, 87, 89);
+  border: none;
+  padding: 0.75rem;
+  width: 12rem;
+  font-size: 1rem;
+  color: rgb(27, 60, 138);
+  cursor: pointer;
+  font-weight: 200;
+}
+.option-left {
+  border-radius: 1rem 0 0 1rem;
+}
+.option-right {
+  border-radius: 0 1rem 1rem 0;
+}
+.option-active {
+  background-color: rgb(249, 87, 89);
+  color: white;
+}
+.primary {
+  background-color: rgb(249, 87, 89);
+  color: white;
+  border-radius: 6.5rem;
+  border: none;
+  padding: 0.75rem 4rem;
+  font-size: 1rem;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+.cards-container {
+  display: flex;
+  margin-top: 3rem;
+  flex-wrap: wrap
+}
+.card {
+  background-color: rgb(27,60, 138);
+  width: 28%;
+  color: white;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-right: 0.5rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+.card p {
+  position: absolute;
+  top: -30%;
+  left: 92.5%;
+  cursor: pointer;
+  color: rgba(255,255,255, 0.178 )
+}
+</style>
