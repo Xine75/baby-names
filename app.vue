@@ -59,13 +59,10 @@ const optionsArray = [
       <button class="primary" @click="computeSelectedNames">Find Names</button>
     </div>
     <div class="cards-container">
-      <div
-          v-for="name in selectedNames"
-          :key="name"
-          class="card">
-        {{ name }}
-        <p>x</p>
-      </div>
+        <CardName
+        v-for="name in selectedNames"
+        :key="name"
+        :name="name"/>
     </div>
   </div>
 </template>
