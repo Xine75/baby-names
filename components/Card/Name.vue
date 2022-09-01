@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import {Gender, Length, Popularity} from "~/data";
 
 interface NameProps {
     name: string,
